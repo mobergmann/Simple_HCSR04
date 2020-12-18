@@ -5,7 +5,7 @@ You can use the method with multiple sensors by creating multiple *Simple_HCSR04
 
 # Documentation
 The Documentation can be found in the *docs/* folder.
-The **Start Page** of the Documentation can be found at *docs/index.html* or you can just open the GitHub pages.
+The **Start Page** of the Documentation can be found at *docs/index.html* or you can just open the [GitHub](https://mobergmann.github.io/Simple_HCSR04/annotated.html) pages.
 
 # Examples
 Examples can be found in the *examples/* folder.
