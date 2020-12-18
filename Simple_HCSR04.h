@@ -1,103 +1,126 @@
+/**
+ * @file Simple_HCSR04.h
+ * @author Moritz Bergmann
+ * @brief The header file for the wrapper.
+ * @version 1.0
+ * @date 2020-12-18
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef HCSR04_H_
 #define HCSR04_H_
 
 #include <Arduino.h>
 
 /**
- * @brief a simple wrapper for the HC-SR04 Module.
+ * @brief A simple wrapper for measuring the 
+ * distance with an HC-SR04 Module.
  *
  */
 class Simple_HCSR04
 {
 private:
-    /// private constructor, souldn't be used.
+
+    /**
+     * The Object should only be initialized with members,
+     * therefore the default constructor is private.
+     * 
+     */
     Simple_HCSR04();
 
-    const short ECHO_PIN; /// the echo pin
-    const short TRIG_PIN; /// the trig pin
+    /// The echo pin.
+    const short ECHO_PIN;
+    /// The trig pin.
+    const short TRIG_PIN;
 
 public:
     /**
-     * @brief a simple wrapper for holding an unsigned long.
+     * @brief A simple wrapper for holding the measured distance.
      *
      */
-    class Mesurement
+    class Measurement
     {
     private:
-        /// private constructor, souldn't be used.
-        Mesurement();
+        /**
+         * The Object should only be initialized with members,
+         * therefore the default constructor is private.
+         * 
+         */
+        Measurement();
 
-        const unsigned long m_mesurement; /// the mesuret distance
+        const unsigned long m_measurement; /// The measured distance.
 
     public:
         /**
-         * @brief Construct a new Simple_HCSR04::Mesurement::Mesurement object from a given number.
-         * The given number should be provided in centimertes in order for a right conversion.
+         * @brief Construct a new Simple_HCSR04::Measurement::Measurement object from a given number.
+         * The given number should be provided in centimeters to provide a reasonable conversion.
          *
-         * @param mesurement distance.
+         * @param measurement distance
          */
-        Mesurement(unsigned long mesurement);
+        Measurement(unsigned long measurement);
 
         /**
-         * @brief mesurement in millimeters.
+         * @brief Measurement/ Distance in millimeters.
          *
          * @return unsigned long
          */
         unsigned long mm() const;
 
         /**
-         * @brief mesurement in centimeters.
+         * @brief Measurement/ Distance in centimeters.
          *
          * @return unsigned long
          */
         unsigned long cm() const;
 
         /**
-         * @brief mesurement in decimeters.
+         * @brief Measurement/ Distance in decimeters.
          *
          * @return float
          */
-        float    dm() const;
+        float dm() const;
 
         /**
-         * @brief mesurement in meters.
+         * @brief Measurement/ Distance in meters.
          *
          * @return float
          */
-        float    m() const;
+        float m() const;
 
     };
 
     /**
-     * @brief Construct a new Simple_HCSR04::Simple_HCSR04 object.
-     * Also sets the pin mode.
+     * @brief Construct a new Simple_HCSR04::Simple_HCSR04 object and
+     * initializes the pin mode for the given pins.
      *
-     * @param echo_pin Echo pin on the microcontroller
-     * @param trig_pin Trig pin on the microcontroller
+     * @param echo_pin Echo pin on the microcontroller (warning, is being cast to an unsigned short).
+     * @param trig_pin Trig pin on the microcontroller (warning, is being cast to an unsigned short).
      */
     Simple_HCSR04(const short echo_pin, const short trig_pin);
 
     /**
-     * @brief echo pin
+     * @brief Getter for the Echo pin.
      *
      * @return short
      */
     short getEchoPin() const;
 
     /**
-     * @brief trig pin
+     * @brief Getter for the Trig pin.
      *
      * @return short
      */
     short getTrigPin() const;
 
     /**
-     * @brief mesures the time a send soundwafe needs and calculates the distance.
-     * This function needs at least 12 milliseconds to execute.
+     * @brief Measures the distance between the module and the object in front of it.
+     * Warning: this function needs at least 12 milliseconds to execute.
      *
-     * @return Simple_HCSR04::Mesurement*
+     * @return Simple_HCSR04::Measurement*
      */
-    Mesurement* mesure();
+    Measurement* measure();
 
 };
 

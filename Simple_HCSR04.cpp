@@ -1,42 +1,54 @@
-#include <Arduino.h>
+/**
+ * @file Simple_HCSR04.cpp
+ * @author Moritz Bergmann
+ * @brief The cpp file for the wrapper.
+ * @version 1.0
+ * @date 2020-12-18
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 
+#include <Arduino.h>
 #include "Simple_HCSR04.h"
 
+/***
+ * Measurement
+ */
 
-#pragma region Mesurement
-
-Simple_HCSR04::Mesurement::Mesurement(unsigned long mesurement)
-    : m_mesurement(mesurement) {}
+Simple_HCSR04::Measurement::Measurement(unsigned long measurement)
+    : m_measurement(measurement) {}
 
 
-#pragma region Mesurement getter
+/***
+ * Measurement getter
+ */
 
-unsigned long Simple_HCSR04::Mesurement::mm() const
+unsigned long Simple_HCSR04::Measurement::mm() const
 {
-    return this->m_mesurement * 10;
+    return this->m_measurement * 10;
 }
 
-unsigned long Simple_HCSR04::Mesurement::cm() const
+unsigned long Simple_HCSR04::Measurement::cm() const
 {
-    return this->m_mesurement;
+    return this->m_measurement;
 }
 
-float Simple_HCSR04::Mesurement::dm() const
+float Simple_HCSR04::Measurement::dm() const
 {
-    return this->m_mesurement / 10;
+    return this->m_measurement / 10;
 }
 
-float Simple_HCSR04::Mesurement::m() const
+float Simple_HCSR04::Measurement::m() const
 {
-    return this->m_mesurement / 100;
+    return this->m_measurement / 100;
 }
 
-#pragma endregion
-
-#pragma endregion
 
 
-#pragma region Simple_HCSR04
+/***
+ * Simple_HCSR04
+ */
 
 Simple_HCSR04::Simple_HCSR04(const short echo_pin, const short trig_pin)
     : ECHO_PIN(echo_pin), TRIG_PIN(trig_pin)
@@ -45,7 +57,10 @@ Simple_HCSR04::Simple_HCSR04(const short echo_pin, const short trig_pin)
     pinMode(TRIG_PIN, OUTPUT);
 }
 
-#pragma region Simple_HCSR04 getter
+
+/***
+ * Simple_HCSR04 getter
+ */
 
 short Simple_HCSR04::getEchoPin() const
 {
@@ -57,9 +72,12 @@ short Simple_HCSR04::getTrigPin() const
     return this->TRIG_PIN;
 }
 
-#pragma endregion
 
-Simple_HCSR04::Mesurement* Simple_HCSR04::mesure()
+/***
+ * Simple_HCSR04 methods
+ */
+
+Simple_HCSR04::Measurement* Simple_HCSR04::measure()
 {
     digitalWrite(TRIG_PIN, LOW);
     delayMicroseconds(2);
@@ -71,7 +89,5 @@ Simple_HCSR04::Mesurement* Simple_HCSR04::mesure()
     unsigned long duration = pulseIn(ECHO_PIN, HIGH);
     unsigned long distance = duration * 0.034 / 2;
 
-    return new Simple_HCSR04::Mesurement(distance);
+    return new Simple_HCSR04::Measurement(distance);
 }
-
-#pragma endregion

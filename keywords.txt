@@ -3,10 +3,10 @@
 #######################################
 
 Simple_HCSR04	KEYWORD1
-Mesurement		KEYWORD1
+Measurement		KEYWORD1
 
 Simple_HCSR04	KEYWORD3
-Mesurement		KEYWORD3
+Measurement		KEYWORD3
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -18,7 +18,7 @@ dm				KEYWORD2
 m				KEYWORD2
 getEchoPin		KEYWORD2
 getTrigPin		KEYWORD2
-mesure			KEYWORD2
+measure			KEYWORD2
 
 ######################################
 # Constants (LITERAL1)

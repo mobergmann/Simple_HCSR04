@@ -9,6 +9,7 @@
  *
  */
 
+#include <Arduino.h>
 #include <Simple_HCSR04.h>
 
 const int ECHO_PIN = 4; /// the pin at which the sensor echo is connected
@@ -26,9 +27,9 @@ void setup()
 
 void loop()
 {
-  unsigned long distance = sensor->mesure()->cm();
+  unsigned long distance = sensor->measure()->cm();
 
   Serial.print("distance: ");
   Serial.print(distance);
-  Serial.println("cm\n");
+  Serial.print("cm\n");
 }
